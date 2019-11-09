@@ -36,6 +36,7 @@ button = 3
 ultrasonic_ranger = 2
 led = 4
 reset = 0
+firedoor = ""
 
 pinMode(buzzer,"OUTPUT")
 pinMode(button,"INPUT")
@@ -64,12 +65,14 @@ while True:
             grovepi.digitalWrite(buzzer,0)
             time.sleep(1)
             if fireDoor > 5:
+                firedoor = "Firedoor is open"
                 print ("Firedoor is open")
             else:
+                firedoor = "Firedoor closed"
                 print ("Firedoor closed")
         time.sleep(1)
         fireAlarm["Reset"] = button_sensor
-        fireAlarm["FireDoor"] = fireDoor
+        fireAlarm["Firedoor"] = firedoor
         fireAlarm["Temperature"] = temp
 
         with open('room_data.json') as file:
