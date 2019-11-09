@@ -26,7 +26,7 @@ from grovepi import *
 import grovepi
 import time
 import dweepy
-import mongo as d
+import database as d
 
 dht_sensor_port = 7
 dht_sensor_type = 0
