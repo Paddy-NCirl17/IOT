@@ -55,17 +55,19 @@ while True:
         print(grovepi.digitalRead(button))
         print(grovepi.ultrasonicRead(ultrasonic_ranger))
         print("temp =", temp,)
+        
         if fireDoor > 5:
            firedoor = "Firedoor is open"
            print ("Firedoor is open")
+           
         else:
            firedoor = "Firedoor closed"
-           print ("Firedoor closed")       
+           print ("Firedoor closed")
+           
         if temp > 21 and reset !=1:
             alarm = "Alarm is active"
             print(alarm)
-            if button_sensor ==1:
-                reset = 1                         
+            
         else:
          alarm = "Alarm is not active"
          print(alarm)
@@ -75,6 +77,11 @@ while True:
          digitalWrite(led,0)
          grovepi.digitalWrite(buzzer,0)
          time.sleep(1)
+         
+        if button_sensor ==1:
+         reset = 1
+         digitalWrite(led,0)
+         grovepi.digitalWrite(buzzer,0)          
         fireAlarm["Alarm"] = alarm
         fireAlarm["Firedoor"] = firedoor
         fireAlarm["Temperature"] = temp
