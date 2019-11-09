@@ -29,6 +29,8 @@ dht_sensor_port = 7
 dht_sensor_type = 0
 buzzer = 8
 
+grovepi.pinMode(buzzer,"OUTPUT")
+
 while True:
         # get the temperature and Humidity from the DHT sensor
         [ temp,hum ] = dht(dht_sensor_port,dht_sensor_type)
@@ -36,3 +38,5 @@ while True:
         if temp > 21:
            grovepi.digitalWrite(buzzer,1)
            time.sleep(1)
+           grovepi.digitalWrite(buzzer,0)
+           time.sleep(1)           
