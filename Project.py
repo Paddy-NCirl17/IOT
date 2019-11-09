@@ -29,8 +29,10 @@ import time
 dht_sensor_port = 7
 dht_sensor_type = 0
 buzzer = 8
+button = 3
 
 grovepi.pinMode(buzzer,"OUTPUT")
+grovepi.pinMode(button,"INPUT")
 
 while True:
         print("on")
@@ -41,4 +43,5 @@ while True:
            grovepi.digitalWrite(buzzer,1)
            time.sleep(1)
            grovepi.digitalWrite(buzzer,0)
-           time.sleep(1)           
+           time.sleep(1)
+           print(grovepi.digitalRead(button)) 
