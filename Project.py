@@ -25,6 +25,8 @@ THE SOFTWARE.
 from grovepi import *
 import grovepi
 import time
+import dweepy
+import mongo as d
 
 dht_sensor_port = 7
 dht_sensor_type = 0
@@ -38,15 +40,19 @@ pinMode(buzzer,"OUTPUT")
 pinMode(button,"INPUT")
 pinMode(led,"OUTPUT")
 
+
+
 while True:
     try:
+        fireAlarm ={}
         # get the temperature and Humidity from the DHT sensor
         [ temp,hum ] = dht(dht_sensor_port,dht_sensor_type)
         button_sensor = grovepi.digitalRead(button)
+        fireDoor = grovepi.ultrasonicRead(ultrasonic_ranger)
         print(grovepi.digitalRead(button))
         print(grovepi.ultrasonicRead(ultrasonic_ranger))
         print("temp =", temp,)
-        if temp > 23 and reset !=1:
+        if temp > 21 and reset !=1:
            if button_sensor ==1:
             reset = 1
            else:
@@ -56,11 +62,25 @@ while True:
             digitalWrite(led,0)
             grovepi.digitalWrite(buzzer,0)
             time.sleep(1)
-            if grovepi.ultrasonicRead(ultrasonic_ranger) > 0:
+            if fireDoor > 5:
                 print ("Firedoor is open")
             else:
                 print ("Firedoor closed")
-        time.sleep(1)    
+        time.sleep(1)
+        fireAlarm["Reset"] = button_sensor
+        fireAlarm["FireDoor"] = fireDoor
+        fireAlarm["Temperature"] = temp
+
+        with open('room_data.json') as file:
+            json_data = json.loads(file.read())
+            fire_ID = json_data['fire_ID']
+            fireAlarm['location'] = json_data['location']
+            
+        url = "https://dweet.io/dweet/for/test_"+fire_ID
+            dweepy.dweet_for(fire_ID,fireAlarm)
+        
+        mongo_insert = d.insert_into(fireAlarm)
+        
     except KeyboardInterrupt:
         grovepi.digitalWrite(buzzer,0)
         break
