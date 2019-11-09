@@ -25,6 +25,7 @@ THE SOFTWARE.
 from grovepi import *
 
 dht_sensor_port = 7
+dht_sensor_type = 0
 
 while True:
         # get the temperature and Humidity from the DHT sensor
