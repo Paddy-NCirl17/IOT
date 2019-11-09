@@ -41,7 +41,8 @@ while True:
         if temp > 21:
            grovepi.digitalWrite(buzzer,1)
            time.sleep(1)
-        else if grovepi.digitalRead(button)== 1:
-               grovepi.digitalWrite(buzzer,0)
-               time.sleep(1)
+           grovepi.digitalWrite(buzzer,0)
+           time.sleep(1)
+        if grovepi.digitalRead(button)== 1:
+           grovepi.digitalWrite(buzzer,0)
         print(grovepi.digitalRead(button)) 
