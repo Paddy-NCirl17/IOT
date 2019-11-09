@@ -69,5 +69,5 @@ class th02:
 if __name__ == "__main__":
 	t= th02()
 	while True:
-		print(t.getTemperature(),t.getHumidity())
+		print(t.getTemperature())
 		time.sleep(.5)
