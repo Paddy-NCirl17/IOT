@@ -36,6 +36,7 @@ button = 3
 ultrasonic_ranger = 2
 led = 4
 reset = 0
+alarm = ""
 firedoor = ""
 
 pinMode(buzzer,"OUTPUT")
@@ -63,14 +64,18 @@ while True:
                 print ("Firedoor closed")
         if button_sensor ==1:
          reset = 1
+         alarm = "Alarm is not active"
+         print(alarm)
         else:
+         alarm = "Alarm is active"
+         print(alarm)
          digitalWrite(led,1)
          grovepi.digitalWrite(buzzer,1)
          time.sleep(1)
          digitalWrite(led,0)
          grovepi.digitalWrite(buzzer,0)
          time.sleep(1)
-        fireAlarm["Reset"] = button_sensor
+        fireAlarm["Alarm"] = alarm
         fireAlarm["Firedoor"] = firedoor
         fireAlarm["Temperature"] = temp
 
