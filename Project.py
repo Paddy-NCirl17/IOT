@@ -39,7 +39,7 @@ while True:
         [ temp,hum ] = dht(dht_sensor_port,dht_sensor_type)
         grovepi.digitalRead(button)
         print("temp =", temp,)
-        if temp > 21 && grovepi.digitalRead(button) != 1:
+        if temp > 21 and grovepi.digitalRead(button) != 1:
            grovepi.digitalWrite(buzzer,1)
            time.sleep(1)
            grovepi.digitalWrite(buzzer,0)
