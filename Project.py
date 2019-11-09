@@ -61,15 +61,15 @@ while True:
             else:
                 firedoor = "Firedoor closed"
                 print ("Firedoor closed")
-           if button_sensor ==1:
-            reset = 1
-           else:
-            digitalWrite(led,1)
-            grovepi.digitalWrite(buzzer,1)
-            time.sleep(1)
-            digitalWrite(led,0)
-            grovepi.digitalWrite(buzzer,0)
-            time.sleep(1)
+        if button_sensor ==1:
+         reset = 1
+        else:
+         digitalWrite(led,1)
+         grovepi.digitalWrite(buzzer,1)
+         time.sleep(1)
+         digitalWrite(led,0)
+         grovepi.digitalWrite(buzzer,0)
+         time.sleep(1)
         fireAlarm["Reset"] = button_sensor
         fireAlarm["Firedoor"] = firedoor
         fireAlarm["Temperature"] = temp
