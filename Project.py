@@ -77,7 +77,7 @@ while True:
             fireAlarm['location'] = json_data['location']
             
         url = "https://dweet.io/dweet/for/test_"+fire_ID
-            dweepy.dweet_for(fire_ID,fireAlarm)
+        dweepy.dweet_for(fire_ID,fireAlarm)
         
         mongo_insert = d.insert_into(fireAlarm)
         
