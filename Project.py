@@ -55,7 +55,8 @@ class th02:
 			print(t_raw)
 		temperature = (t_raw[1]<<8|t_raw[2])>>2
 		return (temperature/32.0)-50.0
-	    
+
+
 	def getStatus(self):
 		status=bus.read_i2c_block_data(self.ADDRESS, self.TH02_REG_STATUS,1)
 		if debug:
@@ -65,8 +66,8 @@ class th02:
 		else:
 			return 0
 
-        if __name__ == "__main__":
-                t= th02()
-                while True:
-                        print(t.getTemperature(),t.getHumidity())
-                        time.sleep(.5)
+if __name__ == "__main__":
+	t= th02()
+	while True:
+		print(t.getTemperature(),t.getHumidity())
+		time.sleep(.5)
