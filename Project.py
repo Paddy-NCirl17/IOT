@@ -37,12 +37,15 @@ grovepi.pinMode(button,"INPUT")
 while True:
         # get the temperature and Humidity from the DHT sensor
         [ temp,hum ] = dht(dht_sensor_port,dht_sensor_type)
+        grovepi.digitalRead(button)
         print("temp =", temp,)
-        if temp > 21:
+        if temp > 21 && grovepi.digitalRead(button) != 1:
            grovepi.digitalWrite(buzzer,1)
            time.sleep(1)
            grovepi.digitalWrite(buzzer,0)
            time.sleep(1)
-        if grovepi.digitalRead(button)== 1:
-           grovepi.digitalWrite(buzzer,0)
-        print(grovepi.digitalRead(button)) 
+    except KeyboardInterrupt:
+        grovepi.digitalWrite(buzzer,0)
+        break
+    except IOError:
+        print ("Error")        
