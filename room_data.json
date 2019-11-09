@@ -1,0 +1,8 @@
+{
+    "fire_ID":"Fire_Room",
+    "location":{
+		"Wing":"West",
+        "Floor":4,
+        "Room":101
+    }
+}
