@@ -62,12 +62,12 @@ while True:
             else:
                 firedoor = "Firedoor closed"
                 print ("Firedoor closed")
-        if button_sensor ==1:
-         reset = 1
-         alarm = "Alarm is not active"
-         print(alarm)
+            if button_sensor ==1:
+             reset = 1
+             alarm = "Alarm is active"
+             print(alarm)
         else:
-         alarm = "Alarm is active"
+         alarm = "Alarm is not active"
          print(alarm)
          digitalWrite(led,1)
          grovepi.digitalWrite(buzzer,1)
