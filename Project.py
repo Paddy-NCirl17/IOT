@@ -27,7 +27,6 @@ from grovepi import *
 dht_sensor_port = 7
 
 while True:
-    try:
         # get the temperature and Humidity from the DHT sensor
 		[ temp ] = dht(dht_sensor_port,dht_sensor_type)
 		print("temp =", temp,)
