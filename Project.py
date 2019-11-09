@@ -33,6 +33,6 @@ while True:
         # get the temperature and Humidity from the DHT sensor
 		[ temp,hum ] = dht(dht_sensor_port,dht_sensor_type)
 		print("temp =", temp,)
-        if temp > 21
-        grovepi.digitalWrite(buzzer,1)
-        time.sleep(1)
+        if temp > 21:
+            grovepi.digitalWrite(buzzer,1)
+            time.sleep(1)
