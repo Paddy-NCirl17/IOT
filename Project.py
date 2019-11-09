@@ -30,10 +30,12 @@ dht_sensor_port = 7
 dht_sensor_type = 0
 buzzer = 8
 button = 3
+led = 4
 reset = 0
 
-grovepi.pinMode(buzzer,"OUTPUT")
-grovepi.pinMode(button,"INPUT")
+pinMode(buzzer,"OUTPUT")
+pinMode(button,"INPUT")
+pinMode(led,"OUTPUT")
 
 while True:
     try:
@@ -46,8 +48,10 @@ while True:
            if button_sensor ==1:
             reset = 1
            else:
+            digitalWrite(led,1)
             grovepi.digitalWrite(buzzer,1)
             time.sleep(1)
+            digitalWrite(led,0)
             grovepi.digitalWrite(buzzer,0)
             time.sleep(1)
     except KeyboardInterrupt:
