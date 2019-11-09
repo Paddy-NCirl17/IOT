@@ -39,7 +39,7 @@ while True:
     try:
         # get the temperature and Humidity from the DHT sensor
         [ temp,hum ] = dht(dht_sensor_port,dht_sensor_type)
-         button = grovepi.digitalRead(button)
+        button = grovepi.digitalRead(button)
         print("temp =", temp,)
         if temp > 23 and reset !=1:
            if button ==1:
