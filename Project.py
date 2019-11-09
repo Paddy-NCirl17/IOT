@@ -33,6 +33,7 @@ buzzer = 8
 grovepi.pinMode(buzzer,"OUTPUT")
 
 while True:
+        print("on")
         # get the temperature and Humidity from the DHT sensor
         [ temp,hum ] = dht(dht_sensor_port,dht_sensor_type)
         print("temp =", temp,)
