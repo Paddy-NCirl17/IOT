@@ -56,7 +56,7 @@ while True:
             digitalWrite(led,0)
             grovepi.digitalWrite(buzzer,0)
             time.sleep(1)
-            if grovepi.ultrasonicRead(ultrasonic_ranger) > 0
+            if grovepi.ultrasonicRead(ultrasonic_ranger) > 0:
                 print ("Firedoor is open")
             else:
                 print ("Firedoor closed")
