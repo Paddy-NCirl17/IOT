@@ -30,6 +30,7 @@ dht_sensor_port = 7
 dht_sensor_type = 0
 buzzer = 8
 button = 3
+ultrasonic_ranger = 2
 led = 4
 reset = 0
 
@@ -43,6 +44,7 @@ while True:
         [ temp,hum ] = dht(dht_sensor_port,dht_sensor_type)
         button_sensor = grovepi.digitalRead(button)
         print(grovepi.digitalRead(button))
+        print(grovepi.ultrasonicRead(ultrasonic_ranger))
         print("temp =", temp,)
         if temp > 23 and reset !=1:
            if button_sensor ==1:
