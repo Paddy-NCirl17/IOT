@@ -57,6 +57,7 @@ while True:
         print(grovepi.digitalRead(button))
         print(grovepi.ultrasonicRead(ultrasonic_ranger))
         print("temp =", temp,)
+        print(timeStamp)
         
         if fireDoor > 5:
            firedoor = "Firedoor is open"
