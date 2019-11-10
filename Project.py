@@ -28,6 +28,7 @@ import time
 from time import gmtime, strftime
 import dweepy
 import json
+import csv
 import database as d
 
 dht_sensor_port = 7
@@ -53,10 +54,10 @@ while True:
         [ temp,hum ] = dht(dht_sensor_port,dht_sensor_type)
         button_sensor = grovepi.digitalRead(button)
         fireDoor = grovepi.ultrasonicRead(ultrasonic_ranger)
-        timeStamp = strftime("%a, %d %b %Y %H:%M:%S +0000", gmtime())
+        timeStamp = strftime("%a, %d %b %Y %H:%M:%S", gmtime())
         print(grovepi.digitalRead(button))
         print(grovepi.ultrasonicRead(ultrasonic_ranger))
-        print("temp =", temp,)
+        print("temp =", temp)
         print(timeStamp)
         
         if fireDoor > 5:
@@ -85,7 +86,8 @@ while True:
         if button_sensor ==1:
          reset = 1
          digitalWrite(led,0)
-         grovepi.digitalWrite(buzzer,0)          
+         grovepi.digitalWrite(buzzer,0)
+
         fireAlarm["Alarm"] = alarm
         fireAlarm["Firedoor"] = firedoor
         fireAlarm["Temperature"] = temp
@@ -100,6 +102,15 @@ while True:
         dweepy.dweet_for(fire_ID,fireAlarm)
         
         mongo_insert = d.insert_into(fireAlarm)
+        
+        with open('names.csv', 'w') as csvfile:
+        fieldnames = ['first_name', 'last_name']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+        writer.writeheader()
+        writer.writerow({'first_name': 'Baked', 'last_name': 'Beans'})
+        writer.writerow({'first_name': 'Lovely', 'last_name': 'Spam'})
+        writer.writerow({'first_name': 'Wonderful', 'last_name': 'Spam'})
         
     except KeyboardInterrupt:
         grovepi.digitalWrite(buzzer,0)
