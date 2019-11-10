@@ -25,6 +25,7 @@ THE SOFTWARE.
 from grovepi import *
 import grovepi
 import time
+from time import gmtime, strftime
 import dweepy
 import json
 import database as d
