@@ -52,6 +52,7 @@ while True:
         [ temp,hum ] = dht(dht_sensor_port,dht_sensor_type)
         button_sensor = grovepi.digitalRead(button)
         fireDoor = grovepi.ultrasonicRead(ultrasonic_ranger)
+        timeStamp = strftime("%a, %d %b %Y %H:%M:%S +0000", gmtime())
         print(grovepi.digitalRead(button))
         print(grovepi.ultrasonicRead(ultrasonic_ranger))
         print("temp =", temp,)
@@ -86,6 +87,8 @@ while True:
         fireAlarm["Alarm"] = alarm
         fireAlarm["Firedoor"] = firedoor
         fireAlarm["Temperature"] = temp
+        fireAlarm["Time"] = timeStamp
+        
 
         with open('room_data.json') as file:
             json_data = json.loads(file.read())
