@@ -113,10 +113,10 @@ while True:
 
         with open('room_data.json') as file:
             json_data = json.loads(file.read())
-            fire_Room = json_data['fire_Room']
+            fire_ID = json_data['fire_ID']
             fireAlarm['location'] = json_data['location']
             
-        dweepy.dweet_for(fire_Room,fireAlarm)
+        dweepy.dweet_for(fire_ID,fireAlarm)
         
         mongo_insert = d.insert_into(fireAlarm)
        
