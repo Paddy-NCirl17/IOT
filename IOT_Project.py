@@ -97,7 +97,7 @@ while True:
          alarm = "Alarm is not active"
          print(alarm)
 
-        if reset() = 1:
+        if reset() == 1:
          digitalWrite(led,0)
          grovepi.digitalWrite(buzzer,0)
 
