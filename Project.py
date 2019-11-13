@@ -28,7 +28,6 @@ import time
 from time import gmtime, strftime
 import dweepy
 import json
-import csv
 import database as d
 
 dht_sensor_port = 7
@@ -96,10 +95,10 @@ while True:
 
         with open('room_data.json') as file:
             json_data = json.loads(file.read())
-            fire_ID = json_data['fire_ID']
+            fire_Room = json_data['fire_Room']
             fireAlarm['location'] = json_data['location']
             
-        dweepy.dweet_for(fire_ID,fireAlarm)
+        dweepy.dweet_for(fire_Room,fireAlarm)
         
         mongo_insert = d.insert_into(fireAlarm)
        
