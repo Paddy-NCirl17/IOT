@@ -40,6 +40,8 @@ sound_sensor = 0
 r_led = 4
 b_led = 6
 alarm = ""
+fireDoor = ""
+roomNoise = ""
 threshold_value = 400
 
 pinMode(buzzer,"OUTPUT")
