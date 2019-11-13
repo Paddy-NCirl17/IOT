@@ -40,7 +40,7 @@ sound_sensor = 0
 r_led = 4
 b_led = 6
 alarm = ""
-fireDoor = ""
+door = ""
 roomNoise = ""
 threshold_value = 400
 
@@ -64,10 +64,10 @@ def reset():
 def fireDoor():
     fireDoor = grovepi.ultrasonicRead(ultrasonic_ranger)
     if firedoor > 5:
-       firedoor = "Firedoor is open"
+       door = "Firedoor is open"
     else:
-       firedoor = "Firedoor closed"
-    return fireDoor
+       door = "Firedoor closed"
+    return door
     
 def timeStamp():
     timeStamp = strftime("%a, %d %b %Y %H:%M:%S", gmtime())
@@ -104,7 +104,7 @@ while True:
          grovepi.digitalWrite(buzzer,0)
 
         fireAlarm["Alarm"] = alarm
-        fireAlarm["Firedoor"] = firedoor
+        fireAlarm["Firedoor"] = door
         fireAlarm["Temperature"] = temp
         fireAlarm["Time"] = timeStamp
         fireAlarm["Noise"] = roomNoise
