@@ -55,13 +55,13 @@ def getTemp() :
 def reset():
     button_sensor = grovepi.digitalRead(button)
     reset = 0
-    if button_sensor == 1
+    if button_sensor == 1:
         reset = 1
     return reset
 
 def fireDoor():
     fireDoor = grovepi.ultrasonicRead(ultrasonic_ranger)
-    if firedoor > 5
+    if firedoor > 5:
        firedoor = "Firedoor is open"
     else:
        firedoor = "Firedoor closed"
