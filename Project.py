@@ -81,10 +81,10 @@ while True:
         if temp > 21 and reset !=1:
             alarm = "Alarm is active"
             print(alarm)
-            digitalWrite(led,1)
+            digitalWrite(r_led,1)
             grovepi.digitalWrite(buzzer,1)
             time.sleep(1)
-            digitalWrite(led,0)
+            digitalWrite(r_led,0)
             grovepi.digitalWrite(buzzer,0)
             time.sleep(1)
                      
@@ -95,7 +95,7 @@ while True:
 
         if button_sensor ==1:
          reset = 1
-         digitalWrite(led,0)
+         digitalWrite(r_led,0)
          grovepi.digitalWrite(buzzer,0)
 
         fireAlarm["Alarm"] = alarm
