@@ -35,14 +35,19 @@ dht_sensor_type = 0
 buzzer = 8
 button = 3
 ultrasonic_ranger = 2
-led = 4
-reset = 0
+sound_sensor = 0
+r_led = 4
+b_led = 6
 alarm = ""
-firedoor = ""
+door = ""
+roomNoise = ""
+threshold_value = 400
 
 pinMode(buzzer,"OUTPUT")
 pinMode(button,"INPUT")
-pinMode(led,"OUTPUT")
+pinMode(r_led,"OUTPUT")
+pinMode(b_led,"OUTPUT")
+pinMode(sound_sensor,"INPUT")
 
 
 
@@ -54,10 +59,8 @@ while True:
         button_sensor = grovepi.digitalRead(button)
         fireDoor = grovepi.ultrasonicRead(ultrasonic_ranger)
         timeStamp = strftime("%a, %d %b %Y %H:%M:%S", gmtime())
-        print(grovepi.digitalRead(button))
-        print(grovepi.ultrasonicRead(ultrasonic_ranger))
-        print("temp =", temp)
-        print(timeStamp)
+        sensor_value = grovepi.analogRead(sound_sensor)
+        
         
         if fireDoor > 5:
            firedoor = "Firedoor is open"
@@ -66,6 +69,13 @@ while True:
         else:
            firedoor = "Firedoor closed"
            print ("Firedoor closed")
+           
+        if sensor_value > threshold_value:
+            grovepi.digitalWrite(b_led,1)
+            roomNoise = "Room Occupied"
+        else:
+           grovepi.digitalWrite(b_led,0)
+           roomNoise = "Room UnOccupied"
            
         if temp > 21 and reset !=1:
             alarm = "Alarm is active"
@@ -88,9 +98,11 @@ while True:
          grovepi.digitalWrite(buzzer,0)
 
         fireAlarm["Alarm"] = alarm
-        fireAlarm["Firedoor"] = firedoor
+        fireAlarm["Firedoor"] = door
         fireAlarm["Temperature"] = temp
         fireAlarm["Time"] = timeStamp
+        fireAlarm["Noise"] = roomNoise
+        fireAlarm["Reset"] = reset
         
 
         with open('room_data.json') as file:
