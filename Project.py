@@ -40,6 +40,7 @@ r_led = 4
 b_led = 6
 alarm = ""
 door = ""
+reset = 0
 roomNoise = ""
 threshold_value = 400
 
