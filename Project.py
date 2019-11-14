@@ -78,7 +78,7 @@ while True:
         else:
            grovepi.digitalWrite(b_led,0)
            roomNoise = "Room UnOccupied"
-           print(sensor_value)
+           print("Noise",sensor_value)
            
         if temp > 21 and reset !=1:
             alarm = "Alarm is active"
