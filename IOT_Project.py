@@ -27,8 +27,6 @@ import grovepi
 import time
 from time import gmtime, strftime
 import dweepy
-import json
-import csv
 import database as d
 
 dht_sensor_port = 7
@@ -85,26 +83,47 @@ def Noise():
     
 while True:
     try:
-        fireAlarm ={}           
-        if getTemp() > 21 and reset()!=1:
+        fireAlarm ={}
+        # get the temperature and Humidity from the DHT sensor
+        [ temp,hum ] = dht(dht_sensor_port,dht_sensor_type)
+        button_sensor = grovepi.digitalRead(button)
+        fireDoor = grovepi.ultrasonicRead(ultrasonic_ranger)
+        timeStamp = strftime("%a, %d %b %Y %H:%M:%S", gmtime())
+        print(grovepi.digitalRead(button))
+        print(grovepi.ultrasonicRead(ultrasonic_ranger))
+        print("temp =", temp)
+        print(timeStamp)
+        
+        if fireDoor > 5:
+           firedoor = "Firedoor is open"
+           print ("Firedoor is open")
+           
+        else:
+           firedoor = "Firedoor closed"
+           print ("Firedoor closed")
+           
+        if temp > 21 and reset !=1:
             alarm = "Alarm is active"
             print(alarm)
-            digitalWrite(r_led,1)
+            digitalWrite(led,1)
             grovepi.digitalWrite(buzzer,1)
             time.sleep(1)
-            digitalWrite(r_led,0)
+            digitalWrite(led,0)
             grovepi.digitalWrite(buzzer,0)
-            time.sleep(1)                  
+            time.sleep(1)
+                     
+            
         else:
          alarm = "Alarm is not active"
          print(alarm)
 
-        if reset() == 1:
+        if button_sensor ==1:
+         reset = 1
          digitalWrite(led,0)
          grovepi.digitalWrite(buzzer,0)
 
         fireAlarm["Alarm"] = alarm
-        fireAlarm["Firedoor"] = door
+        fireAlarm["Firedoor"] = firedoor
         fireAlarm["Temperature"] = temp
         fireAlarm["Time"] = timeStamp
         
