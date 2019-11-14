@@ -70,7 +70,7 @@ while True:
         else:
            door = "Firedoor closed"
            print ("Firedoor closed")
-           print (fireDoor)
+           print ("Door",fireDoor)
            
         if sensor_value > threshold_value:
             grovepi.digitalWrite(b_led,1)
@@ -82,8 +82,8 @@ while True:
            
         if temp > 21 and reset !=1:
             alarm = "Alarm is active"
-            print(alarm)
-            print(temp)
+            print("alarm",alarm)
+            print("temp",temp)
             digitalWrite(r_led,1)
             grovepi.digitalWrite(buzzer,1)
             time.sleep(1)
