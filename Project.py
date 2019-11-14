@@ -95,8 +95,8 @@ while True:
             
         else:
          alarm = "Alarm is not active"
-            print("alarm",alarm)
-            print("temp",temp)
+         print("alarm",alarm)
+         print("temp",temp)
 
         if button_sensor ==1:
          reset = 1
