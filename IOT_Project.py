@@ -107,8 +107,6 @@ while True:
         fireAlarm["Firedoor"] = door
         fireAlarm["Temperature"] = temp
         fireAlarm["Time"] = timeStamp
-        fireAlarm["Noise"] = roomNoise
-        fireAlarm["Reset"] = reset
         
 
         with open('room_data.json') as file:
