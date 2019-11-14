@@ -102,7 +102,7 @@ while True:
          grovepi.digitalWrite(buzzer,0)
 
         fireAlarm["Alarm"] = alarm
-        fireAlarm["Firedoor"] = firedoor
+        fireAlarm["Firedoor"] = door
         fireAlarm["Temperature"] = temp
         fireAlarm["Time"] = timeStamp
         fireAlarm["Noise"] = roomNoise
