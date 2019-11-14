@@ -95,7 +95,8 @@ while True:
             
         else:
          alarm = "Alarm is not active"
-         print(alarm)
+            print("alarm",alarm)
+            print("temp",temp)
 
         if button_sensor ==1:
          reset = 1
@@ -107,6 +108,7 @@ while True:
         fireAlarm["Temperature"] = temp
         fireAlarm["Time"] = timeStamp
         fireAlarm["Noise"] = roomNoise
+        fireAlarm["Noise_Value"] = sensor_value
         fireAlarm["Reset"] = reset
         
 
