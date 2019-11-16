@@ -30,7 +30,7 @@ import dweepy
 import json
 import thread
 import database as d
-
+############# Port Selection#######
 dht_sensor_port = 7
 dht_sensor_type = 0
 buzzer = 8
@@ -39,6 +39,7 @@ ultrasonic_ranger = 2
 sound_sensor = 1
 r_led = 4
 b_led = 6
+######### Paramaters#########
 alarm = ""
 door = ""
 door_count = 0
@@ -47,12 +48,14 @@ reset = 0
 roomNoise = ""
 threshold_value = 850
 
+####### I/O #########
 pinMode(buzzer,"OUTPUT")
 pinMode(button,"INPUT")
 pinMode(r_led,"OUTPUT")
 pinMode(b_led,"OUTPUT")
 pinMode(sound_sensor,"INPUT")
 
+#### ASync Function######
 def Send(thread_fire):
     global fire_ID
     global fireAlarm
@@ -69,7 +72,7 @@ while True:
         timeStamp = strftime("%a, %d %b %Y %H:%M:%S", gmtime())
         sensor_value = grovepi.analogRead(sound_sensor)
         
-        
+        #### Ultra Sonic Ranger - If > 5, Door is open and icrements a counter
         if fireDoor > 5:  
            door = "Firedoor is open"
            if door_init == 0:
@@ -82,7 +85,7 @@ while True:
            door_init =0
            door_count=0
            print ("Door",fireDoor)
-           
+        #### Sound Sensor - If the Level is over threshold, led on and send doore open.  
         if sensor_value > threshold_value:
             grovepi.digitalWrite(b_led,1)
             roomNoise = "Room Occupied"
@@ -91,7 +94,7 @@ while True:
            grovepi.digitalWrite(b_led,0)
            roomNoise = "Room UnOccupied"
            print("Noise = %d" %sensor_value)
-           
+         #### Temperature Sensor, if over 23, Led on, activate buzzer.  
         if temp > 23 and reset !=1:
             alarm = "Alarm is active"
             print("alarm",alarm)
@@ -108,7 +111,7 @@ while True:
          alarm = "Alarm is not active"
          print("alarm",alarm)
          print("temp",temp)
-
+        #### Reset button - Turns off the buzzer with one press and resets to zero on subsequent press.
         if button_sensor ==1 and reset ==0:
          reset = 1
          digitalWrite(r_led,0)
@@ -117,7 +120,7 @@ while True:
          reset = 0
          
         
-            
+         #### - Parameters to be send to database and Dweet.   
         fireAlarm["Alarm"] = alarm
         fireAlarm["Firedoor"] = door
         fireAlarm["Temperature"] = temp
@@ -127,15 +130,15 @@ while True:
         fireAlarm["Reset"] = reset
         fireAlarm["door_count"] = door_count
         
-
+        #### Read the JSON file
         with open('room_data.json') as file:
             json_data = json.loads(file.read())
             fire_ID = json_data['fire_ID']
             fireAlarm['location'] = json_data['location']
             
-        #dweepy.dweet_for(fire_ID,fireAlarm)
+        # ASync call
         thread.start_new_thread(Send, ("Fire_Thread",)) 
-        
+        # Insert to database
         mongo_insert = d.insert_into(fireAlarm)
         
         time.sleep(1)   
