@@ -141,7 +141,7 @@ while True:
         # Insert to database
         mongo_insert = d.insert_into(fireAlarm)
         
-        time.sleep(1)   
+        time.sleep(3)   
         
     except KeyboardInterrupt:
         grovepi.digitalWrite(buzzer,0)
