@@ -132,7 +132,6 @@ while True:
             fireAlarm['location'] = json_data['location']
             
         #dweepy.dweet_for(fire_ID,fireAlarm)
-        time.sleep(5)
         thread.start_new_thread(Send, ("Fire_Thread",)) 
         
         mongo_insert = d.insert_into(fireAlarm)
