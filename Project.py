@@ -70,19 +70,17 @@ while True:
         sensor_value = grovepi.analogRead(sound_sensor)
         
         
-        if fireDoor > 5: # 
+        if fireDoor > 5:  
            door = "Firedoor is open"
            if door_init == 0:
             door_count += 1
             door_init +=1
-           
-           print ("Firedoor is open")
+           print ("Door",fireDoor)
            
         else:
            door = "Firedoor closed"
            door_init =0
            door_count=0
-           print ("Firedoor closed")
            print ("Door",fireDoor)
            
         if sensor_value > threshold_value:
