@@ -124,7 +124,7 @@ while True:
             
         #dweepy.dweet_for(fire_ID,fireAlarm)
         thread.start_new_thread(Send, ("Fire_Thread",)) 
-        
+        time.sleep(3)
         mongo_insert = d.insert_into(fireAlarm)
        
         
