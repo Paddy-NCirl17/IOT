@@ -51,7 +51,11 @@ pinMode(r_led,"OUTPUT")
 pinMode(b_led,"OUTPUT")
 pinMode(sound_sensor,"INPUT")
 
-
+def Send(thread_fire):
+    global fire_ID
+    global fireAlarm
+    dweepy.dweet_for(fire_ID,fireAlarm)
+    
 
 while True:
     try:
@@ -118,7 +122,8 @@ while True:
             fire_ID = json_data['fire_ID']
             fireAlarm['location'] = json_data['location']
             
-        dweepy.dweet_for(fire_ID,fireAlarm)
+        #dweepy.dweet_for(fire_ID,fireAlarm)
+        thread.start_new_thread(Send, ("Fire_Thread",)) 
         
         mongo_insert = d.insert_into(fireAlarm)
        
