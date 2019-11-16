@@ -45,7 +45,7 @@ door_count = 0
 door_init = 0
 reset = 0
 roomNoise = ""
-threshold_value = 950
+threshold_value = 850
 
 pinMode(buzzer,"OUTPUT")
 pinMode(button,"INPUT")
