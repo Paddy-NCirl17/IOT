@@ -41,6 +41,7 @@ r_led = 4
 b_led = 6
 alarm = ""
 door = ""
+door_count = 0
 reset = 0
 roomNoise = ""
 threshold_value = 400
@@ -68,8 +69,9 @@ while True:
         sensor_value = grovepi.analogRead(sound_sensor)
         
         
-        if fireDoor > 5:
+        if fireDoor > 5: # 
            door = "Firedoor is open"
+           door_count += 1
            print ("Firedoor is open")
            
         else:
@@ -115,6 +117,7 @@ while True:
         fireAlarm["Noise"] = roomNoise
         fireAlarm["Noise_Value"] = sensor_value
         fireAlarm["Reset"] = reset
+        fireAlarm["door_count"] = door_count
         
 
         with open('room_data.json') as file:
@@ -123,8 +126,9 @@ while True:
             fireAlarm['location'] = json_data['location']
             
         #dweepy.dweet_for(fire_ID,fireAlarm)
+        time.sleep(2)
         thread.start_new_thread(Send, ("Fire_Thread",)) 
-        time.sleep(3)
+        
         mongo_insert = d.insert_into(fireAlarm)
        
         
