@@ -68,6 +68,7 @@ while True:
         fireDoor = grovepi.ultrasonicRead(ultrasonic_ranger)
         timeStamp = strftime("%a, %d %b %Y %H:%M:%S", gmtime())
         sensor_value = grovepi.analogRead(sound_sensor)
+        sound = sensor_value/3
         
         
         if fireDoor > 5:  
@@ -83,14 +84,14 @@ while True:
            door_count=0
            print ("Door",fireDoor)
            
-        if sensor_value > threshold_value:
+        if sound > threshold_value:
             grovepi.digitalWrite(b_led,1)
             roomNoise = "Room Occupied"
-            print("Noise = %d" %sensor_value)
+            print("Noise = %d" %sound)
         else:
            grovepi.digitalWrite(b_led,0)
            roomNoise = "Room UnOccupied"
-           print("Noise = %d" %sensor_value)
+           print("Noise = %d" %sound)
            
         if temp > 23 and reset !=1:
             alarm = "Alarm is active"
@@ -115,13 +116,15 @@ while True:
          grovepi.digitalWrite(buzzer,0)
         elif button_sensor ==1 and reset ==1:
          reset = 0
+         
+        
             
         fireAlarm["Alarm"] = alarm
         fireAlarm["Firedoor"] = door
         fireAlarm["Temperature"] = temp
         fireAlarm["Time"] = timeStamp
         fireAlarm["Noise"] = roomNoise
-        fireAlarm["Noise_Value"] = sensor_value
+        fireAlarm["Noise_Value"] = sound
         fireAlarm["Reset"] = reset
         fireAlarm["door_count"] = door_count
         
@@ -135,7 +138,8 @@ while True:
         thread.start_new_thread(Send, ("Fire_Thread",)) 
         
         mongo_insert = d.insert_into(fireAlarm)
-       
+        
+        time.sleep(3)   
         
     except KeyboardInterrupt:
         grovepi.digitalWrite(buzzer,0)
