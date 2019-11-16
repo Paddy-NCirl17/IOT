@@ -42,6 +42,7 @@ b_led = 6
 alarm = ""
 door = ""
 door_count = 0
+door_init = 0
 reset = 0
 roomNoise = ""
 threshold_value = 400
@@ -71,11 +72,16 @@ while True:
         
         if fireDoor > 5: # 
            door = "Firedoor is open"
-           door_count += 1
+           if door_init == 0:
+            door_count += 1
+            door_init +=1
+           
            print ("Firedoor is open")
            
         else:
            door = "Firedoor closed"
+           door_init =0
+           door_count=0
            print ("Firedoor closed")
            print ("Door",fireDoor)
            
@@ -105,11 +111,13 @@ while True:
          print("alarm",alarm)
          print("temp",temp)
 
-        if button_sensor ==1:
+        if button_sensor ==1 and reset ==0:
          reset = 1
          digitalWrite(r_led,0)
          grovepi.digitalWrite(buzzer,0)
-
+        elif button_sensor ==1 and reset ==1:
+         reset = 0
+            
         fireAlarm["Alarm"] = alarm
         fireAlarm["Firedoor"] = door
         fireAlarm["Temperature"] = temp
@@ -126,7 +134,7 @@ while True:
             fireAlarm['location'] = json_data['location']
             
         #dweepy.dweet_for(fire_ID,fireAlarm)
-        time.sleep(2)
+        time.sleep(5)
         thread.start_new_thread(Send, ("Fire_Thread",)) 
         
         mongo_insert = d.insert_into(fireAlarm)
