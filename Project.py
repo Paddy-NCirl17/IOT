@@ -45,7 +45,7 @@ door_count = 0
 door_init = 0
 reset = 0
 roomNoise = ""
-threshold_value = 1000
+threshold_value = 900
 
 pinMode(buzzer,"OUTPUT")
 pinMode(button,"INPUT")
@@ -138,7 +138,7 @@ while True:
         
         mongo_insert = d.insert_into(fireAlarm)
         
-        time.sleep(3)   
+        time.sleep(1)   
         
     except KeyboardInterrupt:
         grovepi.digitalWrite(buzzer,0)
