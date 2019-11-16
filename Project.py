@@ -45,7 +45,7 @@ door_count = 0
 door_init = 0
 reset = 0
 roomNoise = ""
-threshold_value = 900
+threshold_value = 950
 
 pinMode(buzzer,"OUTPUT")
 pinMode(button,"INPUT")
@@ -86,7 +86,7 @@ while True:
         if sensor_value > threshold_value:
             grovepi.digitalWrite(b_led,1)
             roomNoise = "Room Occupied"
-            print("Noise = %d" %sound)
+            print("Noise = %d" %sensor_value)
         else:
            grovepi.digitalWrite(b_led,0)
            roomNoise = "Room UnOccupied"
