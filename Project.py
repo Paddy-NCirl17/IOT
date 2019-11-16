@@ -123,7 +123,7 @@ while True:
         fireAlarm["Temperature"] = temp
         fireAlarm["Time"] = timeStamp
         fireAlarm["Noise"] = roomNoise
-        fireAlarm["Noise_Value"] = sound
+        fireAlarm["Noise_Value"] = sensor_value
         fireAlarm["Reset"] = reset
         fireAlarm["door_count"] = door_count
         
