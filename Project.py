@@ -45,7 +45,7 @@ door_count = 0
 door_init = 0
 reset = 0
 roomNoise = ""
-threshold_value = 400
+threshold_value = 1000
 
 pinMode(buzzer,"OUTPUT")
 pinMode(button,"INPUT")
@@ -68,7 +68,6 @@ while True:
         fireDoor = grovepi.ultrasonicRead(ultrasonic_ranger)
         timeStamp = strftime("%a, %d %b %Y %H:%M:%S", gmtime())
         sensor_value = grovepi.analogRead(sound_sensor)
-        sound = sensor_value/3
         
         
         if fireDoor > 5:  
@@ -84,7 +83,7 @@ while True:
            door_count=0
            print ("Door",fireDoor)
            
-        if sound > threshold_value:
+        if sensor_value > threshold_value:
             grovepi.digitalWrite(b_led,1)
             roomNoise = "Room Occupied"
             print("Noise = %d" %sound)
